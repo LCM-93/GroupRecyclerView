@@ -167,12 +167,17 @@ public class GroupRecyclerView extends RelativeLayout {
         //对初始数据进行排序
         Collections.sort(groupItems, new Comparator<GroupItem>() {
             @Override
-            public int compare(GroupItem groupItem, GroupItem t1) {
-                if (groupItem.getGroupChar().equals("#")) {
+            public int compare(GroupItem t1, GroupItem t2) {
+                if("#".equals(t1.getGroupChar()) && !"#".equals(t2.getGroupChar())){
                     return 1;
-                } else {
-                    return groupItem.getGroupChar().compareTo(t1.getGroupChar());
                 }
+                if(!"#".equals(t1.getGroupChar()) && "#".equals(t2.getGroupChar())){
+                    return -1;
+                }
+                if("#".equals(t1.getGroupChar()) && "#".equals(t2.getGroupChar())){
+                    return 0;
+                }
+                return t1.getGroupChar().compareTo(t2.getGroupChar());
             }
         });
         emptyView.setVisibility(VISIBLE);
